@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const Orders = () => {
-   //  Get all data when admin logs in and populate it
-   // store it in redux
 
    const [adminData, setAdminData] = useState([]);
 
@@ -18,7 +16,6 @@ export const Orders = () => {
    }, [setAdminData]);
 
    const handleStatus = (id) => {
-      // console.log(id);
       let cost = prompt("Enter cost");
       axios
          .patch(`http://localhost:8080/orders/${id}`, {
@@ -51,17 +48,16 @@ export const Orders = () => {
                   </tr>
                </thead>
                <tbody>
-                  {adminData.map((e) => {
+                  {adminData.map((ele) => {
                      return (
                         <tr className="orders-row">
-                           <td className="id">{e.id}</td>
-                           <td className="problem">{e.problem}</td>
-                           <td className="owner">{e.owner}</td>
-                           <td className="status">{e.status}</td>
-                           <td className="cost">{e.cost}</td>
-                           {e.status !== "Not Accepted" ? (
+                           <td className="id">{ele.id}</td>
+                           <td className="problem">{ele.problem}</td>
+                           <td className="owner">{ele.owner}</td>
+                           <td className="status">{ele.status}</td>
+                           <td className="cost">{ele.cost}</td>
+                           {ele.status !== "Not Accepted" ? (
                               <td className="change-status">
-                                 {/* Show select dropdown only if status is Not Accepted */}
                                  <select
                                     className="changeStatus"
                                     name="changeStatus"
@@ -80,10 +76,8 @@ export const Orders = () => {
                               "-"
                            )}
                            <td className="accept">
-                              {/* Show this button only if status is Not Accepted */}
-                              {/* on change make request to update it in db, and show changed status in table */}
-                              {e.status === "Not Accepted" ? (
-                                 <button onClick={() => handleStatus(e.id)}>
+                                 {ele.status === "Not Accepted" ? (
+                                 <button onClick={() => handleStatus(ele.id)}>
                                     Accept
                                  </button>
                               ) : null}
