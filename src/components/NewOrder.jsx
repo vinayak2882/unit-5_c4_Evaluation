@@ -3,18 +3,16 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export const NewOrder = () => {
-   // Get data of only this user. store it in redux
-   // GET /orders?owner_name=john will give you all order of user john
-   //  on submit click create a new order, new order has status `Not Accepted`
+  
    const store = useSelector((store) => store);
    const [data, setData] = useState([]);
 
    const getOrders = () => {
       axios
          .get(`http://localhost:8080/orders?owner_name=${store.username}`)
-         .then((fetched) => {
-            // console.log(fetched.data);
-            setData(fetched.data);
+         .then((fetche) => {
+         
+            setData(fetche.data);
          });
    };
 
@@ -32,7 +30,6 @@ export const NewOrder = () => {
                name="problem"
                placeholder="Enter problem"
             />
-            {/* This input is readonly, it's coming from redux */}
             <input
                className="owner-name"
                type="text"
@@ -47,27 +44,25 @@ export const NewOrder = () => {
                name="brand"
                placeholder="Enter brand name"
             />
-            {/* Create new problem, show it in below form immediately */}
+       
             <button className="submit">submit</button>
          </div>
 
          <div className="pastOrders">
-            {/* this button filters the data below. */}
-            {/* it's just a toggle of redux state something like `showUnfinished`  */}
+         
             <button className="filter">
-               {/* Text should change like:   Show {showUnfinished ? "all" : "Only unfinished"} */}
+              
             </button>
 
-            {/* Here create a div for every oreder, filter them before based on `showUnfinished` */}
-            {data.map((e) => {
+            {data.map((ele) => {
                return (
                   <div className="past-orders">
-                     <span className="id">{e.id}</span>.{" "}
-                     <span className="problem">{e.problem}</span>{" "}
+                     <span className="id">{ele.id}</span>.{" "}
+                     <span className="problem">{ele.problem}</span>{" "}
                      <span className="cost">
-                        {/* if status is not accepted then keep it empty otherwise show cost like $1234 */}
+                     
                      </span>
-                     <p className="status">Status: {e.status}</p>
+                     <p className="status">Status: {ele.status}</p>
                      <hr />
                   </div>
                );
