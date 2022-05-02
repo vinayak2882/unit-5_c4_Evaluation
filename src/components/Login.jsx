@@ -9,7 +9,7 @@ export const Login = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
    useSelector((store) => {
-      // console.log(store);
+    
       return store.username;
    });
    const [formData, setFormData] = useState({
@@ -17,22 +17,22 @@ export const Login = () => {
       password: "",
    });
 
-   const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+   const handleChange = (ele) => {
+      setFormData({ ...formData, [ele.target.name]: ele.target.value });
    };
 
-   const handleSubmit = (e) => {
-      e.preventDefault();
+   const handleSubmit = (ele) => {
+      ele.preventDefault();
       axios.get("http://localhost:8080/users").then((data) => {
-         //  console.log(data.data);
-         data.data.map((e) => {
-            // console.log(e)
+   
+         data.data.map((ele) => {
+            
             if (
-               e.username === formData.username &&
-               e.pass === formData.password
+               ele.username === formData.username &&
+               ele.pass === formData.password
             ) {
-               dispatch(login(e));
-               if(e.role === 'admin'){
+               dispatch(login(ele));
+               if(ele.role === 'admin'){
 
                  navigate("/orders")
                } else{
@@ -40,7 +40,7 @@ export const Login = () => {
                }
             }
          });
-         // console.log(data.data)
+         
       });
    };
 
@@ -60,8 +60,6 @@ export const Login = () => {
             name="password"
             placeholder="Enter password"
          />
-         {/* On this button click make network req to find user with same username and password */}
-         {/* get his role, if role is `admin` take him to `/orders` page otherwise take him to `/neworder` */}
          <button className="submit" onClick={handleSubmit}>
             Login
          </button>
